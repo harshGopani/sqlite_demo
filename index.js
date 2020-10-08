@@ -12,16 +12,11 @@ const port = 8000;
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
-
 app.post('/insert', (req, res) => {
     const {IMDb_id,name,year,IMDb_score} = req.body;
     console.log("data:",IMDb_id,name,year,IMDb_score);
     db.run(`INSERT INTO film_data (IMDb_id,NAME,year,IMDb_score) VALUES ('${IMDb_id}','${name}','${year}','${IMDb_score}')`,function(err,row){
         if(err){
-            // console.log("errrrrrrr");
             console.log("error = ",err);
         }else{
             console.log("data inserted successfully");
@@ -74,7 +69,7 @@ app.post('/addNewTable', (req, res) => {
         }   
     })
   });
-  
+
 app.listen(port, () => {
   console.log(`App listening on port ${port}!`)
 });
